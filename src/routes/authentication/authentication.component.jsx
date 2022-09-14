@@ -5,8 +5,9 @@ import {
 } from "../../utils/firebase/firebase.utils";
 
 import SignUp from "../../components/sign-up/signup.component";
+import SignIn from "../../components/sign-in/signin.component";
 
-const SignIn = () => {
+const Authentication = () => {
   const logGoogleUser = async () => {
     const { user } = await signInWithGooglePopup();
     const userDocRef = await createUserDocumentFromAuth(user);
@@ -15,9 +16,10 @@ const SignIn = () => {
     <div>
       <h1>Sign In page</h1>
       <button onClick={logGoogleUser}>Sign in with google popups</button>
+      <SignIn />
       <SignUp />
     </div>
   );
 };
 
-export default SignIn;
+export default Authentication;
