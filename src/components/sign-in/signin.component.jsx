@@ -20,6 +20,10 @@ const SignIn = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+  const resetFormFields = () => {
+    setFormFields(defaultFormFields);
+  };
+
   // const resetFormFields = () => {
   //   setFormFields(defaultFormFields);
   // };
@@ -34,8 +38,24 @@ const SignIn = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await signInAuthUserWithEmailAndPassword(email, password);
-    console.log(response);
+    try {
+      const response = await signInAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
+      console.log(response);
+      resetFormFields();
+    } catch (err) {
+      if (err.code === "auth/too-many-requests") {
+        alert("Please wait, there was too many requests");
+      }
+      if (err.code === "auth/user-not-found") {
+        alert("User was not found");
+      }
+      if (err.code === "auth/wrong-password") {
+        alert("Password is incorrect");
+      }
+    }
   };
 
   const handleChange = (event) => {
@@ -73,7 +93,7 @@ const SignIn = () => {
 
         <div className="buttons-container">
           <Button type="submit">Sign in</Button>
-          <Button buttonType="google" onClick={signInWithGoogle}>
+          <Button type="button" buttonType="google" onClick={signInWithGoogle}>
             Google sign in
           </Button>
         </div>
