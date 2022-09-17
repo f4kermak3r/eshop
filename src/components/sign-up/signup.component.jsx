@@ -5,6 +5,8 @@ import Button from "../button/button.component";
 
 import "./signup.styles.scss";
 
+// import { UserContext } from "../../contexts/user.context";
+
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -27,6 +29,8 @@ const SignUp = () => {
 
   console.log(formFields);
 
+  // const { setCurrentUser } = useContext(UserContext);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -36,6 +40,10 @@ const SignUp = () => {
           email,
           password
         );
+
+        // setCurrentUser(user);
+
+        console.log(user);
 
         createUserDocumentFromAuth(user, { displayName });
 
@@ -107,7 +115,7 @@ const SignUp = () => {
         <FormInput
           label="Confirm password"
           inputOptions={{
-            type: "confirmPassword",
+            type: "password",
             required: true,
             onChange: handleChange,
             name: "confirmPassword",
