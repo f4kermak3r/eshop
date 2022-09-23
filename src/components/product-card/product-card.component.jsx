@@ -7,7 +7,7 @@ import Button, { BUTTON_TYPES_CLASSES } from "../button/button.component";
 
 const ProductCard = ({ product }) => {
   const { name, price, imageUrl } = product;
-  const { addItemToCart, setCartCount, cartCount } = useContext(CartContext);
+  const { addItemToCart } = useContext(CartContext);
 
   // const addProductToCart = () => addItemToCart(product);
 
@@ -22,7 +22,6 @@ const ProductCard = ({ product }) => {
         buttonType={BUTTON_TYPES_CLASSES.inverted}
         onClick={() => {
           addItemToCart(product);
-          setCartCount(cartCount + 1);
         }}
       >
         Add to cart
