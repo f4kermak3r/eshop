@@ -15,7 +15,6 @@ import {
   getDoc,
   setDoc,
   collection,
-  writeBatch,
   query,
   getDocs,
 } from "firebase/firestore";
@@ -30,7 +29,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
@@ -48,7 +47,6 @@ export const db = getFirestore();
 export const getCategoriesAndDocuments = async () => {
   const collectionRef = collection(db, "categories");
   const q = query(collectionRef);
-  
 
   const querySnapshot = await getDocs(q);
 

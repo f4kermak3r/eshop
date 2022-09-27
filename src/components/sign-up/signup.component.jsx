@@ -27,7 +27,6 @@ const SignUp = () => {
 
   console.log(formFields);
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -38,15 +37,13 @@ const SignUp = () => {
           password
         );
 
-        // setCurrentUser(user);
-
         console.log(user);
 
         createUserDocumentFromAuth(user, { displayName });
 
         resetFormFields();
       } catch (error) {
-        if (error.code == "auth/email-already-in-use") {
+        if (error.code === "auth/email-already-in-use") {
           alert("Email is already in use");
         }
         console.log(error, " user creation encoutered an error");
@@ -56,8 +53,8 @@ const SignUp = () => {
 
   const validatePassword = () => {
     let isValid = true;
-    if (password != "" && confirmPassword != "") {
-      if (password != confirmPassword) {
+    if (password !== "" && confirmPassword !== "") {
+      if (password !== confirmPassword) {
         isValid = false;
         alert("Password must match!");
       }
