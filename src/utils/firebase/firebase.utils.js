@@ -78,7 +78,7 @@ export const createUserDocumentFromAuth = async (
       console.log("there was an error");
     }
   }
-  return userDocRef;
+  return userSnapshot;
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -107,6 +107,6 @@ export const getCurrentUser = () => {
         resolve(userAuth);
       },
       reject
-    )
-  })
-}
+    );
+  });
+};
