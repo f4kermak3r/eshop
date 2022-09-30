@@ -5,8 +5,8 @@ import { BUTTON_TYPES_CLASSES } from "../button/button.component";
 
 import { selectCartTotal } from "../../store/cart/cart.selector";
 import { selectCurrentUser } from "../../store/user/user.selector";
-
-import Button from "../button/button.component";
+import { useDispatch } from "react-redux";
+import { clearItems } from "../../store/cart/cart.action";
 
 import {
   PaymentFormContainer,
@@ -20,6 +20,9 @@ export const PaymentForm = () => {
   const amount = useSelector(selectCartTotal);
   const currentUser = useSelector(selectCurrentUser);
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);
+  const dispatch = useDispatch();
+
+  const clearItemHandler = () => dispatch(clearItems());
 
   const paymentHandler = async (e) => {
     e.preventDefault();
@@ -57,6 +60,7 @@ export const PaymentForm = () => {
       alert(paymentResult.error);
     } else {
       if (paymentResult.paymentIntent.status === "succeeded") {
+        clearItemHandler();
         alert("Payment successful");
       }
     }
